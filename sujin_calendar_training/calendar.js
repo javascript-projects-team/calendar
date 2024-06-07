@@ -14,26 +14,35 @@ document.querySelector(
   ".top"
 ).innerHTML = `<div class="this_date">${year}년 ${month}월</div>`;
 
-const firstDay = new Date(`${year}-${month}-1`).getDay() + 1;
+const renderDateDiv = () => {
 
-let tmp = "";
-for (let i = 1; i <= thisMonthDays; i++) {
-  let test = "";
-  if (i % 7 == 1) {
-    test += `<div class="weekend">`;
-    test += `<div class="date_${i}">${i}</div>`;
-    // continue;
-  } else if (i % 7 == 0) {
-    test += `<div class="date_${i}">${i}</div>` + `</div>`;
-  } else {
-    test += `<div class="date_${i}">${i}</div>`;
+
+  const firstDay = new Date(`${year}-${month}-01`).getDay();
+
+
+
+  let tmp = "";
+  for (let i = 1; i <= thisMonthDays; i++) {
+    let test = "";
+    if (i % 7 == 1) {
+      test += `<div class="weekend">`;
+      test += `<div class="date_${i}">${i}</div>`;
+      // continue;
+    } else if (i % 7 == 0) {
+      test += `<div class="date_${i}">${i}</div>` + `</div>`;
+    } else {
+      test += `<div class="date_${i}">${i}</div>`;
+    }
+  
+    if (i == thisMonthDays) {
+      test += `</div>`;
+    }
+  
+    tmp += test;
   }
-
-  if (i == thisMonthDays) {
-    test += `</div>`;
-  }
-
-  tmp += test;
+  
+  document.querySelector(".dates").innerHTML += tmp;
 }
 
-document.querySelector(".dates").innerHTML += tmp;
+
+renderDateDiv();
